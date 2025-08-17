@@ -1,0 +1,83 @@
+services:
+  lightrag:
+    container_name: lightrag
+    image: ghcr.io/hkuds/lightrag:latest
+    build:
+      context: ./LightRAG
+      dockerfile: Dockerfile
+      # tags:
+      #   - ghcr.io/hkuds/lightrag:latest
+    ports:
+      - "${PORT:-9621}:9621"
+      - "8888:8888"
+    volumes:
+      - ./LightRAG/data/rag_storage:/app/data/rag_storage
+      - ./LightRAG/data/inputs:/app/data/inputs
+      - ./LightRAG/config.ini:/app/config.ini
+      - ./LightRAG/.env:/app/.env
+      - ./LightRAG/code:/app/code
+    env_file:
+      - ./LightRAG/.env
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - lightrag_net
+
+  datahub-launcher:
+    build:
+      context: ./datahub
+      dockerfile: Dockerfile
+    container_name: datahub-launcher
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./workspace:/workspace
+      - ./sharepoint:/sharepoint
+    ports:
+      - "9010:9002"    # DataHub UI
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    networks:
+      - lightrag_net
+
+  dozerdb:
+    image: graphstack/dozerdb:5.26.3.0
+    container_name: dozerdb
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/thisisakccdemo
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_dbms_security_procedures_unrestricted=*
+    volumes:
+      - ./neo4j/data:/data
+      - ./neo4j/logs:/logs
+      - ./neo4j/import:/var/lib/neo4j/import
+      - ./neo4j/plugins:/plugins
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - lightrag_net
+
+  neodash:
+    image: diyoyo/neodash:latest-arm
+    container_name: neodash
+    ports:
+      - "5005:5005"
+    environment:
+      - DASHBOARD_NEO4J_URI=bolt://dozerdb:7687
+    depends_on:
+      - dozerdb
+    networks:
+      - lightrag_net
+
+volumes:
+  sharepoint:
+
+networks:
+  lightrag_net:
+    driver: bridge
