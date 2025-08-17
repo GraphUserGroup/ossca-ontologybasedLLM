@@ -159,22 +159,7 @@ jupyter notebook getting-started-graphrag.ipynb
 - Docker and Kubernetes deployment
 - CI/CD pipeline setup
 - Monitoring and maintenance strategies
-
 </details>
-
-## 🎯 Success Stories
-
-> **"From Zero to Hero in 12 Weeks"**
-> 
-> *"I started with basic Python knowledge and zero graph database experience. Through this mentorship program, I can now design ontologies, implement GraphRAG systems, and deploy them to production. The hands-on approach and mentor guidance made all the difference!"*
-> 
-> — Sarah, Mentee Cohort 2024
-
-> **"Mentorship That Transforms"**
-> 
-> *"Watching mentees grow from asking basic questions to contributing production-ready features has been incredibly rewarding. This program proves that with the right guidance, anyone can master complex technologies."*
-> 
-> — Alex, Lead Mentor
 
 ## 🤗 Getting Involved
 
@@ -189,20 +174,6 @@ jupyter notebook getting-started-graphrag.ipynb
 - **Share your expertise** through code examples
 - **Provide guidance** on architectural decisions
 - **Help improve** the learning materials
-
-## 🏆 Achievements
-
-<div align="center">
-
-| **Metric** | **Value** |
-|:-----------|:----------|
-| **Mentees Graduated** | 47 |
-| **Production Deployments** | 12 |
-| **Community Contributions** | 200+ |
-| **Knowledge Graphs Built** | 35 |
-| **Countries Represented** | 8 |
-
-</div>
 
 ## 🔗 Resources and Links
 
