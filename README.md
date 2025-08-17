@@ -12,6 +12,8 @@
 
 ## 📚 Project Overview
 
+![mentoring](image/mentoring.png)
+
 This repository is the culmination of a **12-week mentorship program** where passionate learners collaborated with experienced mentors to master **GitHub-based development workflows** and **ontology-driven GraphRAG systems**. 
 
 > **🎯 Mission**: Democratize knowledge about building practical, production-ready GraphRAG systems using GitHub best practices and semantic knowledge graphs.
